@@ -1474,6 +1474,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1298210948}
   - component: {fileID: 1298210949}
+  - component: {fileID: 1298210951}
+  - component: {fileID: 1298210950}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1511,6 +1513,40 @@ MonoBehaviour:
   ball: {fileID: 476289729}
   rightHand: {fileID: 689503341}
   handPower: 20
+--- !u!114 &1298210950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298210947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430f2809655af0c4ea03470c8370c066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vrPlayer: {fileID: 534669905}
+  lookDownAngle: 15
+  speed: 3
+  moveForward: 0
+--- !u!143 &1298210951
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298210947}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 3.09
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: -0.59, z: 0}
 --- !u!1 &1365738630
 GameObject:
   m_ObjectHideFlags: 0
