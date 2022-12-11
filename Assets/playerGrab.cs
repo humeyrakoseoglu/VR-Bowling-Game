@@ -6,6 +6,7 @@ public class playerGrab : MonoBehaviour
 {
     public GameObject ball;
     public GameObject rightHand;
+    public GameObject Player;
 
     bool inHands = false;
 
@@ -35,6 +36,7 @@ public class playerGrab : MonoBehaviour
                 ballRb.velocity = Vector3.zero;
                 ballRb.useGravity = false;
                 inHands = true;
+                Player.transform.position = new Vector3(0f, 3.0f, -13.5f);
             }
         }else if(inHands){
             ballCol.isTrigger = false;

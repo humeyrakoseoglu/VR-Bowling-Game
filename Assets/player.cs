@@ -6,11 +6,12 @@ public class player : MonoBehaviour
 {
 
     public Transform vrPlayer;
+    public GameObject rightHand;
     public float lookDownAngle = 15.0f;
-    public float speed = 3.0f;
-    //Grab obj = new Grab();
-    //&&obj.canGrab==false
+    public float speed = 4.0f;
+    
     public bool moveForward;
+    
     private 
     CharacterController cc;
 
@@ -24,7 +25,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(vrPlayer.eulerAngles.x >= lookDownAngle && vrPlayer.eulerAngles.x<90.0f ){
+      if(vrPlayer.eulerAngles.x >= lookDownAngle && vrPlayer.eulerAngles.x < 90.0f && rightHand.GetComponent<Grab>().canGrab==false){
         moveForward = true;
       }else{
         moveForward = false;
