@@ -820,6 +820,7 @@ GameObject:
   - component: {fileID: 4046381237589959568}
   - component: {fileID: 4046381237589959569}
   - component: {fileID: 4046381237589959570}
+  - component: {fileID: 3322462885732698708}
   m_Layer: 0
   m_Name: character
   m_TagString: Untagged
@@ -870,7 +871,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4046381237589958697}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 940e9bab458172342969636da312d220, type: 3}
   m_Name: 
@@ -885,7 +886,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4046381237589958697}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aea18ef64f35da4eaa2836d23f3c575, type: 3}
   m_Name: 
@@ -946,6 +947,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 4046381237589959569}
   - {fileID: 4046381237589959570}
+  - {fileID: 3322462885732698708}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -981,6 +983,30 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &3322462885732698708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4046381237589958697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 0
+    Name: Throwing
+  - Type: 4
+    SynchronizeType: 0
+    Name: Moving
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &4046381237589958698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,7 +1812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4046381237589958800
 Transform:
   m_ObjectHideFlags: 0
@@ -1916,6 +1942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfecf06c52a1e14c9772b2396455082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 4046381237589959568}
   player: {fileID: 4046381237589958904}
 --- !u!1 &4046381237589959108
 GameObject:
