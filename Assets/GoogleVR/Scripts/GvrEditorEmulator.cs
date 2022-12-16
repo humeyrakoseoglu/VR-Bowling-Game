@@ -50,10 +50,10 @@ public class GvrEditorEmulator : MonoBehaviour
     // Use mouse to emulate head in the editor.
     // These variables must be static so that head pose is maintained between scene changes,
     // as it is on device.
-    private float mouseX = 0;
-    private float mouseY = 0;
-    private float mouseZ = 0;
-
+    public float mouseX = 0;
+    public float mouseY = 0;
+    public float mouseZ = 0;
+   
     /// <summary>Gets the instance for this singleton class.</summary>
     /// <value>The instance for this singleton class.</value>
     public static GvrEditorEmulator Instance
@@ -189,17 +189,20 @@ public class GvrEditorEmulator : MonoBehaviour
         }
 
         UpdateEditorEmulation();
+        
     }
 
     private bool CanChangeYawPitch()
     {
         // If the MouseControllerProvider is currently active, then don't move the camera.
-        if (MouseControllerProvider.IsActivateButtonPressed)
+        /*if (MouseControllerProvider.IsActivateButtonPressed)
         {
             return false;
         }
 
         return Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+        */
+        return true;
     }
 
     private bool CanChangeRoll()
