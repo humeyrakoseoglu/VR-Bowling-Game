@@ -34,7 +34,10 @@ public class ServerManager : MonoBehaviourPunCallbacks
         Debug.Log("odaya girdi.");
         Debug.Log("karakter oluşturuluyor");
 
-
+         myPlayer.GetComponent<PlayerMovement>().enabled = true;
+        myPlayer.GetComponent<PlayerGrab>().enabled = true;
+        myPlayer.transform.Find("head").gameObject.SetActive(true);
+        
         if (woman)
         {
             myPlayer = (GameObject)PhotonNetwork.Instantiate("woman", Vector3.zero, Quaternion.identity);

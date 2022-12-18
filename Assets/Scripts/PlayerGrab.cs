@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerGrab : MonoBehaviour
@@ -7,7 +8,7 @@ public class PlayerGrab : MonoBehaviour
 {
     GameObject hand;
     GameObject ball;
-    
+    GameObject myplayer;
     public bool isHolding;
     public Animator playerAnim;
 
@@ -16,20 +17,20 @@ public class PlayerGrab : MonoBehaviour
     private float holdDownStartTime;
     private float holdDownTime;
     
-
+    PhotonView view;
     Rigidbody ballRb;
     SphereCollider ballCollider;
 
-    bool isGrabbed;
-    float distance;
     // Start is called before the first frame update
     void Start()
     {
+        view = GetComponent<PhotonView>();
         ball = GameObject.FindGameObjectWithTag("Ball");
-        ballRb= ball.GetComponent<Rigidbody>();
-        ballCollider=ball.GetComponent<SphereCollider>();
-
-
+        if(ball != null)
+        {
+            ballRb = ball.GetComponent<Rigidbody>();
+            ballCollider = ball.GetComponent<SphereCollider>();
+        }
 
         hand = ReturnDecendantOfParent(this.gameObject, "Hand");
     }
@@ -62,11 +63,11 @@ public class PlayerGrab : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, direction, out hit, 3f))
             {
-               
                 if (hit.collider.gameObject.tag == "Ball")
                 {
                     if (Input.GetButtonDown("Fire2"))
                     {
+                        hit.collider.gameObject.GetComponent<PhotonView>().TransferOwnership(view.Owner);
                         Grab();
                     }
                    
@@ -74,9 +75,6 @@ public class PlayerGrab : MonoBehaviour
 
             }
 
-        
-        
-     
         if (isHolding)
         {
             if (Input.GetButtonDown("Fire1"))
@@ -91,7 +89,6 @@ public class PlayerGrab : MonoBehaviour
                 if (holdDownTime < 0.2f)
                 {
                     ballCollider.isTrigger = false;
-                    isGrabbed = false;
                     isHolding = false;
                     ballRb.isKinematic = false;
                     ball.transform.SetParent(null);
@@ -99,8 +96,10 @@ public class PlayerGrab : MonoBehaviour
                 else
                 {
                    
-                    playerAnim.SetTrigger("Throwing");
+                    playerAnim.SetBool("Throwing", true);
                    // LaunchBall(CalculateForce(holdDownTime));
+                   
+                   
                 }
             }
             
@@ -124,11 +123,11 @@ public class PlayerGrab : MonoBehaviour
     public void LaunchBall()
     {
         ballCollider.isTrigger = false;
-        isGrabbed = false;
         isHolding = false;
         ballRb.isKinematic = false;
         ball.transform.SetParent(null);
         ballRb.velocity = Camera.main.transform.rotation * Vector3.forward * CalculateForce(holdDownTime) *Time.deltaTime;
+        playerAnim.SetBool("Throwing", false);
     }
     private float CalculateForce(float holdTime)
     {

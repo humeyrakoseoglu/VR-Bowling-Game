@@ -6,7 +6,6 @@ public class SpawnPlayer : MonoBehaviour
 {
     GameObject myPlayer;
     
-
     
     void Start()
     {
