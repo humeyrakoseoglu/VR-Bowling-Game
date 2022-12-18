@@ -4,13 +4,22 @@ using UnityEngine;
 using Photon.Pun;
 public class SpawnPlayer : MonoBehaviour
 {
-    //public GameObject myObject;
+    GameObject myPlayer;
     
-    // Start is called before the first frame update
+
+    
     void Start()
     {
-       // PhotonNetwork.Instantiate(myObject.name, new Vector3(0,5,0), Quaternion.identity, 0, null);
-        GameObject myPlayer= (GameObject)PhotonNetwork.Instantiate("character",Vector3.zero, Quaternion.identity);
+
+        if (GenderSelection.selectWoman)
+        {
+            myPlayer = (GameObject)PhotonNetwork.Instantiate("woman", Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            myPlayer = (GameObject)PhotonNetwork.Instantiate("man", Vector3.zero, Quaternion.identity);
+        }
+       
         myPlayer.GetComponent<PlayerMovement>().enabled = true;
         myPlayer.GetComponent<PlayerGrab>().enabled = true;
         myPlayer.transform.Find("head").gameObject.SetActive(true);

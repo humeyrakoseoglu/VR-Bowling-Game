@@ -8,53 +8,48 @@ public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed;
     public Animator playerAnim;
-    float inputX;
-    float cameraVertical;
-    float turnX;
-    float turnY;
-
+    
     public PhotonView view;
-   
+    Rigidbody rb;
+    public GameObject head;
+    float verticalMovement;
+    float horizontalMovement;
+    Vector3 moveDirection;
     void Start()
     {
-        //transform.LookAt(look.transform);
+       rb= GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // print(ray);
-        //transform.localRotation= Quaternion.Euler()
-        //transform.rotation = Quaternion.Euler(gvr.mouseY, gvr.mouseX, gvr.mouseZ);
-        // transform.position = (transform.rotation * NECK_OFFSET) - (NECK_OFFSET.y * Vector3.up);
-        //transform.LookAt(look.transform);
-        // inputX = Input.GetAxis("Mouse X");
-        //turnX += inputX * 5f;
-
-        //transform.localRotation=Quaternion.Euler(0, turnX+25f, 0);
-
-
-
-
-        //transform.LookAt(look.transform);
-        // transform.forward=Camera.main.transform.forward;
-
-
+        
 
 
         if (view.IsMine)
         {
+            //horizontalMovement = Input.GetAxisRaw("Horizontal");
+           // verticalMovement = Input.GetAxisRaw("Vertical");
+            //moveDirection =transform.forward * verticalMovement+transform.right* horizontalMovement;
             if (Input.GetKey(KeyCode.W))
             {
                 playerAnim.SetBool("Moving", true);
-                transform.position = transform.position + Camera.main.transform.forward * playerSpeed * Time.deltaTime;
+                //transform.position = transform.position + Camera.main.transform.forward * playerSpeed * Time.deltaTime;
+                rb.AddForce(transform.forward* playerSpeed);
             }
             else
             {
                 playerAnim.SetBool("Moving", false);
             }
         }
+        
+            else
+            {
+            head.SetActive(false);
+                
+            }
+        
        
     }
 }
+

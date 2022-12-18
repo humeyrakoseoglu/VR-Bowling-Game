@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerGrab : MonoBehaviour
 
 {
-    public GameObject hand;
+    GameObject hand;
     GameObject ball;
     
     public bool isHolding;
@@ -28,25 +28,56 @@ public class PlayerGrab : MonoBehaviour
         ball = GameObject.FindGameObjectWithTag("Ball");
         ballRb= ball.GetComponent<Rigidbody>();
         ballCollider=ball.GetComponent<SphereCollider>();
+
+
+
+        hand = ReturnDecendantOfParent(this.gameObject, "Hand");
     }
+
+    public GameObject ReturnDecendantOfParent(GameObject parent, string descendantName)
+    {
+
+        foreach (Transform child in parent.transform)
+        {
+            if (child.name == descendantName)
+            {
+                hand = child.gameObject;
+                break;
+            }
+            else
+            {
+                ReturnDecendantOfParent(child.gameObject, descendantName);
+            }
+        }
+        return hand;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         
-        
-        distance=Vector3.Distance(this.gameObject.transform.position,ball.transform.position);
-        print(distance);
-        if (!isHolding&isGrabbed&&distance<4f)
-        { 
-            ballCollider.isTrigger= true;
-            ballRb.isKinematic = true;
-            isHolding = true;
-            ball.transform.SetParent(hand.transform);
-            ball.transform.position= hand.transform.position;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
+            Vector3 direction = mousePos - Camera.main.transform.position;
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, direction, out hit, 3f))
+            {
+               
+                if (hit.collider.gameObject.tag == "Ball")
+                {
+                    if (Input.GetButtonDown("Fire2"))
+                    {
+                        Grab();
+                    }
+                   
+                }
 
-        }
-        else if (isHolding)
+            }
+
+        
+        
+     
+        if (isHolding)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -81,10 +112,14 @@ public class PlayerGrab : MonoBehaviour
 
     public void Grab()
     {
-        if (distance < 5f)
-        {
-            isGrabbed = true;
-        }
+
+        ballCollider.isTrigger = true;
+        ballRb.isKinematic = true;
+        ball.transform.SetParent(hand.transform);
+        ball.transform.position = hand.transform.position;
+        isHolding = true;
+
+
     }
     public void LaunchBall()
     {
