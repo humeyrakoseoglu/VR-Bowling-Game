@@ -21,8 +21,8 @@ public class GameController : MonoBehaviour
 
     public int remainingRoll;
 
-    private int[] framePoints1 = new int[2];
-    private int[] framePoints2 = new int[2];
+    private int[] framePoints1 = new int[5];
+    private int[] framePoints2 = new int[5];
 
     private int i;
     private int j;
@@ -154,22 +154,10 @@ public class GameController : MonoBehaviour
             }
         }
 
-        for (int a = 0; a < framePoints1.Length; a++)
-        {
-            print("Player 1/Frame " + (a + 1) + ": " + framePoints1[a]);
-        }
-
-        for (int a = 0; a < framePoints2.Length; a++)
-        {
-            print("Player 2/Frame " + (a + 1) + ": " + framePoints2[a]);
-        }
-
         if (j == framePoints2.Length)
         {
-            winner();
-            //resetPoints();
+            StartCoroutine(WaitForTenSeconds());
         }
-
 
 
         ball.transform.position = new Vector3(-5f, 0.618f, 10f);
@@ -178,22 +166,6 @@ public class GameController : MonoBehaviour
         isReset = true;
 
         yield return null;
-    }
-
-    public void winner()
-    {
-        if (score1 > score2)
-        {
-            print("Score of Player 1: " + score1);
-            print("Score of Player 2: " + score2);
-            print("Winner is Player 1, Congrats!!!");
-        }
-        else
-        {
-            print("Score of Player 1: " + score1);
-            print("Score of Player 2: " + score2);
-            print("Winner is Player 2, Congrats!!!");
-        }
     }
 
     public void resetPoints()
@@ -305,6 +277,19 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void resetGame()
+    {
+        resetPoints();
+        resetPins();
+    }
+
+    IEnumerator WaitForTenSeconds()
+    {
+        yield return new WaitForSeconds(10f);
+
+        resetGame();
+    }
+
     public int getFramePoints1(int index)
     {
         return framePoints1[index];
@@ -328,4 +313,6 @@ public class GameController : MonoBehaviour
         }
         return 0;
     }
+
+    
 }

@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
     void Start()
     {
-       rb= GetComponent<Rigidbody>();
+        rb= GetComponent<Rigidbody>();
     }
 
   
@@ -42,14 +42,18 @@ public class PlayerMovement : MonoBehaviour
                 playerAnim.SetBool("Moving", false);
             }
         }
+        else
+        {
+            head.SetActive(false);            
+        }
         
-            else
-            {
-            head.SetActive(false);
-                
-            }
-        
-       
+        if (Input.GetKey(KeyCode.R))
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().resetGame();
+
+        }
+
+
     }
 }
 
