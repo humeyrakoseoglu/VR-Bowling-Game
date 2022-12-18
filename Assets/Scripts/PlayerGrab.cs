@@ -97,9 +97,12 @@ public class PlayerGrab : MonoBehaviour
                 {
                    
                     playerAnim.SetBool("Throwing", true);
-                   // LaunchBall(CalculateForce(holdDownTime));
-                   
-                   
+                    // LaunchBall(CalculateForce(holdDownTime));
+
+                    GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().CalculatePoints();
+
+
+
                 }
             }
             
