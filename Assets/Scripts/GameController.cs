@@ -169,7 +169,7 @@ public class GameController : MonoBehaviour
     }
 
     public void resetPoints()
-    {
+    {   
         i = 0;
         j = 0;
 
